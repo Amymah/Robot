@@ -1,3 +1,4 @@
+//Declerative pipiline syntax
 pipeline {
     agent any
 
