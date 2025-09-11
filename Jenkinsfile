@@ -10,7 +10,7 @@
 //         }
 //            stage('Print Statement'){
 //                steps{
-//                    echo ">>> running declarative pipeline syntax..."
+//                    println ">>> running declarative pipeline syntax..."
 //                }
 //            }
 //         stage('Install Dependencies') {
@@ -40,7 +40,7 @@
 node {
     stage('Print Statment')
     {
-        echo ">>> Running pipeline sicripted syntax..."
+        println ">>> Running pipeline sicripted syntax..."
     }
     stage('Check Python') {
         bat 'python --version'
