@@ -34,6 +34,10 @@
 
 //Scripted pipeline syntax
 node {
+    stage('Print Statment')
+    {
+        println ">>> Running pipeline sicripted syntax..."
+    }
     stage('Check Python') {
         bat 'python --version'
     }
