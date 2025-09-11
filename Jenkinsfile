@@ -1,33 +1,57 @@
 //Declerative pipiline syntax
-pipeline {
-    agent any
+// pipeline {
+//     agent any
 
-    stages {
-        stage('Check Python') {
-            steps {
-                bat 'python --version'
-            }
-        }
+//     stages {
+//         stage('Check Python') {
+//             steps {
+//                 bat 'python --version'
+//             }
+//         }
 
-        stage('Install Dependencies') {
-            steps {
-                bat 'pip install robotframework robotframework-seleniumlibrary'
-            }
-        }
+//         stage('Install Dependencies') {
+//             steps {
+//                 bat 'pip install robotframework robotframework-seleniumlibrary'
+//             }
+//         }
 
-        stage('Run Robot Tests') {
-            steps {
-                bat 'robot checkbox.robot'
-                bat 'robot checkout.robot'
-                bat 'robot Cmethods.robot'
-            }
-        }
+//         stage('Run Robot Tests') {
+//             steps {
+//                 bat 'robot checkbox.robot'
+//                 bat 'robot checkout.robot'
+//                 bat 'robot Cmethods.robot'
+//             }
+//         }
+//     }
+
+//     post {
+//         always {
+//             // Archive Robot test reports
+//             archiveArtifacts artifacts: '**/log.html, **/report.html, **/output.xml', allowEmptyArchive: true
+//         }
+//     }
+// }
+
+//Scripted pipeline syntax
+node {
+    stage('Check Python') {
+        bat 'python --version'
     }
 
-    post {
-        always {
-            // Archive Robot test reports
-            archiveArtifacts artifacts: '**/log.html, **/report.html, **/output.xml', allowEmptyArchive: true
-        }
+    stage('Install Dependencies') {
+        bat 'pip install robotframework robotframework-seleniumlibrary'
+    }
+
+    stage('Run Robot Tests') {
+        bat 'robot checkbox.robot'
+        bat 'robot checkout.robot'
+        bat 'robot Cmethods.robot'
+    }
+
+    // Post actions (always run)
+    stage('Archive Reports') {
+        // Archive Robot test reports
+        archiveArtifacts artifacts: '**/log.html, **/report.html, **/output.xml', allowEmptyArchive: true
     }
 }
+
